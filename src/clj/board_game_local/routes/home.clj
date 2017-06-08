@@ -8,12 +8,18 @@
   (layout/render
     "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
 
-(def register-params [{:name "firstname" :icon "fa fa-user fa" :display "First Name"}
-                 {:name "lastname" :icon "fa fa-user fa" :display "Last Name"}
-                 {:name "age" :icon "" :display "Age"}
-                 {:name "gender" :icon "fa fa-transgender-alt fa" :display "Gender"}
-                 {:name "confirmpassword" :icon "fa fa-lock fa-lg" :display "Confirm Password"}
-                 {:name "location" :icon "fa fa-map fa" :display "Location"}])
+(def register-params [{:name "firstname" :icon "fa fa-user fa" :display "First Name"
+                       :placeholder "e.g. Alex"}
+                 {:name "lastname" :icon "fa fa-user fa" :display "Last Name"
+                  :placeholder "e.g. Smith"}
+                 {:name "age" :icon "" :display "Age"
+                  :placeholder "e.g. 32"}
+                 {:name "gender" :icon "fa fa-transgender-alt fa" :display "Gender"
+                  :placeholder "Enter the term that best describes your gender"}
+                 {:name "confirmpassword" :icon "fa fa-lock fa-lg" :display "Confirm Password"
+                  :placeholder "You know how account registration works by now"}
+                 {:name "location" :icon "fa fa-map fa" :display "Location"
+                  :placeholder "This won't be listed on your profile"}])
 
 (def login-params [{:name "email" :icon "fa fa-envelope fa" :display "Email"}
                    {:name "password" :icon "fa fa-lock fa-lg" :display "Password"}])
