@@ -4,7 +4,7 @@
     <div class="row main">
 	<div class="main-login main-center col-sm-8">
             <div>{{error}}</error>
-	    <form class="form-horizontal" method="post" action="/user">
+		<form class="form-horizontal" method="post" action={% ifequal type "login" %}"/auth"{% else %}"/login"{% endifequal %}>
 
                 {% for param in user-params %}
                     <div class="form-group">

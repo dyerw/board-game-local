@@ -5,6 +5,7 @@
             [buddy.hashers :as hashers]
             [struct.core :as st]
             [clj-time.format :as f]
+            [ring.util.response :refer [redirect]]
             [ring.util.http-response :as response]
             [board-game-local.db.core :refer [create-user! get-user-by-email]]
             [board-game-local.routes.home :refer [register-page]]
@@ -51,7 +52,7 @@
                                     hash-password-in-params
                                     dob->time-in-params
                                     create-user!)]
-                (register-page {:error nil})
+                (redirect "/")
                 (register-page {:error "Error creating user"})))))
 
 (defroutes user-routes
