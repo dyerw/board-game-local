@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [routes wrap-routes]]
             [board-game-local.layout :refer [error-page]]
             [board-game-local.routes.home :refer [home-routes]]
+            [board-game-local.routes.user :refer [user-routes]]
             [compojure.route :as route]
             [board-game-local.env :refer [defaults]]
             [mount.core :as mount]
@@ -13,6 +14,7 @@
 
 (def app-routes
   (routes
+    #'user-routes
     (-> #'home-routes
         (wrap-routes middleware/wrap-csrf)
         (wrap-routes middleware/wrap-formats))
