@@ -4,6 +4,6 @@ CREATE TABLE users
  last_name VARCHAR(30),
  email VARCHAR(30),
  gender VARCHAR(30),
- age INTEGER,
+ dob DATE,
  location VARCHAR(300),
  password VARCHAR(300));

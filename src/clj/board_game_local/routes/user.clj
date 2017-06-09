@@ -4,6 +4,7 @@
             [compojure.coercions :refer [as-int]]
             [buddy.hashers :as hashers]
             [struct.core :as st]
+            [clj-time.format :as f]
             [ring.util.http-response :as response]
             [board-game-local.db.core :refer [create-user! get-user-by-email]]
             [board-game-local.routes.home :refer [register-page]]
@@ -12,12 +13,16 @@
 (def user-scheme
  {:firstname [st/required st/string]
   :lastname  [st/required st/string]
-  :age       [st/required st/integer-str]
+  :dob       [st/required st/string]
   :gender    [st/required st/string]
   :email     [st/required st/email]
   :location  [st/required st/string]
   :password  [st/required st/string]
   :confirmpassword [st/required st/string]}) 
+
+(defn dob->time-in-params [params]
+  (merge params
+         {:dob (f/parse (f/formatter "YYYY-MM-DD") (:dob params))})) 
 
 (defn hash-password-in-params [params]
   (merge params
@@ -42,7 +47,10 @@
               (:confirmpassword coerced-params)) 
         (register-page {:error "Passwords do not match"})
 
-        :else (if-let [new-user (create-user! (hash-password-in-params coerced-params))]
+        :else (if-let [new-user (-> coerced-params
+                                    hash-password-in-params
+                                    dob->time-in-params
+                                    create-user!)]
                 (register-page {:error nil})
                 (register-page {:error "Error creating user"})))))
 
