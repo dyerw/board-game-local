@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row main">
+	<div class="main-login main-center col-sm-8">
+            <div>{{error}}</error>
+		<form class="form-horizontal" method="post" action="/event">
+
+                {% for param in event-params %}
+                    <div class="form-group">
+                        <label for="{{param.name}}"
+                               class="cols-sm-2 control-label">{{param.display}}</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="{{param.icon}}" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control"
+                                       name="{{param.name}}"
+                                       id="{{param.name}}"
+                                       placeholder="{{param.placeholder}}"/>
+                            </div>
+                        </div>
+                    </div>
+		{% endfor %}
+
+			<div class="form-group ">
+				<button type="submit" 
+				    class="btn btn-primary btn-lg btn-block login-button">
+				Create Event
+				</button>
+			</div>
+		    </form>
+	</div>
+    </div>
+</div>
+
+
+{% endblock %}
